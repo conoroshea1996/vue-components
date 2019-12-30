@@ -1,9 +1,11 @@
 <template>
   <div class>
+    <ColorPicker />
     <h1>Jobs</h1>
     <input type="number" name="quantity" min="1" :value="columns" @change="setColumns" />
     <h3>{{ columns }}</h3>
     <hr />
+    <input type="text" v-if="searchInput" class="searchBar" />
     <styled-cols :cols="columns">
       <JobCard v-for="job in getJobs" :key="job.id" />
     </styled-cols>
@@ -13,6 +15,7 @@
 <script>
 import styled from "vue-styled-components";
 import { mapGetters, mapState } from "vuex";
+import ColorPicker from "./ColorPicker";
 import JobCard from "./JobCard";
 
 const titleProps = { cols: Number };
@@ -27,13 +30,17 @@ const StyledCols = styled("div", titleProps)`
 export default {
   components: {
     "styled-cols": StyledCols,
-    JobCard
+    JobCard,
+    ColorPicker
   },
   computed: {
     ...mapState(["editor"]),
     ...mapGetters(["getJobs"]),
     columns() {
       return this.editor.jobSection.columns;
+    },
+    searchInput() {
+      return this.editor.jobSection.searchBox;
     }
   },
   methods: {

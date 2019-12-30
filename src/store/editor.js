@@ -4,7 +4,9 @@ export const state = {
     title: ""
   },
   jobSection: {
-    columns: 4
+    columns: 3,
+    searchBox: false,
+    color: "white"
   }
 };
 
@@ -17,6 +19,9 @@ export const mutations = {
   },
   SET_JOBSECTION_COLUMNS(state, payload) {
     state.jobSection.columns = payload;
+  },
+  SET_BACKGROUD_COLOR(state, payload) {
+    state.jobSection.color = payload;
   }
 };
 
@@ -29,5 +34,8 @@ export const actions = {
   },
   setColumns({ commit }, colAmount) {
     commit("SET_JOBSECTION_COLUMNS", colAmount);
+  },
+  setColor({ commit }, color) {
+    commit("SET_BACKGROUD_COLOR", color);
   }
 };
